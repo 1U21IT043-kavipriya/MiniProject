@@ -1,0 +1,48 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class BloodBankManagementSystem {
+private static Map<String, Integer> bloodBank = new HashMap<>();
+    
+    public static void main(String[] args) {
+        initializeBloodBank();
+        displayBloodBank();
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter blood group to check availability: ");
+        String bloodGroup = scanner.nextLine().toUpperCase();
+        
+        if (bloodBank.containsKey(bloodGroup)) {
+            int availableUnits = bloodBank.get(bloodGroup);
+            System.out.println("Blood group " + bloodGroup + " is available with " + availableUnits + " units.");
+        } else {
+            System.out.println("Blood group " + bloodGroup + " is not available.");
+        }
+        
+        scanner.close();
+    }
+    
+    private static void initializeBloodBank() {
+        bloodBank.put("A+", 10);
+        bloodBank.put("A-", 5);
+        bloodBank.put("B+", 7);
+        bloodBank.put("B-", 3);
+        bloodBank.put("O+", 12);
+        bloodBank.put("O-", 8);
+        bloodBank.put("AB+", 4);
+        bloodBank.put("AB-", 2);
+    }
+    
+    private static void displayBloodBank() {
+        System.out.println("Blood Bank Inventory:");
+        System.out.println("=====================");
+        System.out.println("Blood Group\tUnits");
+        System.out.println("---------------------");
+        for (Map.Entry<String, Integer> entry : bloodBank.entrySet()) {
+            System.out.println(entry.getKey() + "\t\t" + entry.getValue());
+        }
+        System.out.println("=====================");
+    }
+
+}
